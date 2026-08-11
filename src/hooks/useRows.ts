@@ -1,0 +1,3 @@
+import { useCallback, useEffect, useState } from 'react'
+import { listRows } from '@/lib/data'
+export function useRows<T>(table:string,order='updated_at',softDelete=true){const[data,setData]=useState<T[]>([]);const[loading,setLoading]=useState(true);const[error,setError]=useState('');const refresh=useCallback(async()=>{setLoading(true);setError('');try{setData(await listRows<T>(table,order,false,softDelete))}catch(value){setError(value instanceof Error?value.message:'Unable to load records')}finally{setLoading(false)}},[order,softDelete,table]);useEffect(()=>{void refresh()},[refresh]);return{data,loading,error,refresh}}
