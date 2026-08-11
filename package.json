@@ -1,7 +1,7 @@
 {
   "name": "kithwork",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An open-source workspace for relationships, projects, and follow-through.",
   "license": "AGPL-3.0-or-later",
   "repository": {
@@ -44,7 +44,7 @@
     "@vitejs/plugin-react": "6.0.5",
     "jsdom": "^24.1.3",
     "supabase": "2.113.0",
-    "typescript": "7.0.2",
+    "typescript": "6.0.3",
     "vite": "8.2.1",
     "vitest": "^3.2.6"
   }
