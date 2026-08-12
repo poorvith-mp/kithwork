@@ -6,7 +6,7 @@ import { Analytics } from '@vercel/analytics/react'
 
 import { ApplicationRoot } from '@/app/ApplicationRoot'
 import { resolveRuntimeConfiguration } from '@/lib/runtimeConfiguration'
-import '@/styles.css'
+import '@/tailwind.css'
 
 const configuration = resolveRuntimeConfiguration(import.meta.env)
 

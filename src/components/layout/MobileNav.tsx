@@ -16,7 +16,7 @@ export function MobileNav() {
 
   return (
     <nav
-      className="mobile-nav"
+      className="fixed bottom-0 right-0 left-0 z-50 grid border-t border-line bg-surface/95 px-2 py-1.5 backdrop-blur-md md:hidden"
       aria-label="Mobile navigation"
       style={{ gridTemplateColumns: `repeat(${primary.length + 1}, minmax(0, 1fr))` }}
     >
@@ -25,13 +25,26 @@ export function MobileNav() {
           key={href}
           to={href}
           end={href === '/'}
-          className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+          className={({ isActive }) =>
+            `flex flex-col items-center gap-1 rounded-lg py-1.5 text-[0.65rem] font-bold transition-colors ${
+              isActive ? 'text-accent' : 'text-muted hover:text-ink'
+            }`
+          }
         >
-          <Icon size={20}/><span>{label}</span>
+          <Icon size={18} />
+          <span>{label}</span>
         </NavLink>
       ))}
-      <NavLink to="/more" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-        <Ellipsis size={20}/><span>More</span>
+      <NavLink
+        to="/more"
+        className={({ isActive }) =>
+          `flex flex-col items-center gap-1 rounded-lg py-1.5 text-[0.65rem] font-bold transition-colors ${
+            isActive ? 'text-accent' : 'text-muted hover:text-ink'
+          }`
+        }
+      >
+        <Ellipsis size={18} />
+        <span>More</span>
       </NavLink>
     </nav>
   )

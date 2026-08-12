@@ -6,10 +6,12 @@ import {
   CalendarDays,
   CheckSquare2,
   CircleDollarSign,
+  ClipboardList,
   FolderKanban,
   HardDrive,
   Home,
   Inbox,
+  LineChart,
   Megaphone,
   Settings,
   UserCog,
@@ -25,6 +27,7 @@ export type NavigationItem = {
   icon: LucideIcon
   module?: ModuleKey
   locked?: boolean
+  badge?: 'new' | 'dot' | number
 }
 
 export type NavigationGroup = {
@@ -50,6 +53,8 @@ export const navigationGroups: NavigationGroup[] = [
       { label: 'Calendar', href: '/calendar', icon: CalendarDays, module: 'calendar' },
       { label: 'Inbox', href: '/inbox', icon: Inbox, module: 'inbox' },
       { label: 'Files', href: '/files', icon: HardDrive, module: 'files' },
+      { label: 'Analytics', href: '/analytics', icon: LineChart, badge: 'new' },
+      { label: 'Activity Log', href: '/logs', icon: ClipboardList, badge: 'new' },
     ],
   },
   {

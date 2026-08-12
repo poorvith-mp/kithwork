@@ -3,7 +3,7 @@ import { Ban, CheckCircle2, ShieldX } from 'lucide-react'
 
 import { Button } from '@/components/ui/Button'
 import { Drawer } from '@/components/ui/Overlay'
-import { Badge } from '@/components/ui/Panel'
+import { Badge } from '@/components/ui/Badge'
 import {
   setCollaboratorState,
   updateCollaboratorAccess,

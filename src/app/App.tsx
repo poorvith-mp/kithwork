@@ -19,6 +19,8 @@ import { PeoplePage } from '@/features/people/PeoplePage'
 import { PipelinePage } from '@/features/pipeline/PipelinePage'
 import { ProfilePage } from '@/features/profile/ProfilePage'
 import { ProjectsPage } from '@/features/projects/ProjectsPage'
+import { AnalyticsPage } from '@/features/analytics/AnalyticsPage'
+import { LogPage } from '@/features/logs/LogPage'
 import { ReportsPage } from '@/features/reports/ReportsPage'
 import { MorePage, NotFoundPage, NotificationsPage, SearchPage } from '@/features/shared/UtilityPages'
 import { SettingsPage } from '@/features/settings/SettingsPage'
@@ -68,6 +70,8 @@ export function App() {
           <Route element={<ModuleRoute module="reports"/>}>
             <Route path="/reports" element={<ReportsPage/>}/>
           </Route>
+          <Route path="/analytics" element={<AnalyticsPage/>}/>
+          <Route path="/logs" element={<LogPage/>}/>
           <Route element={<ModuleRoute module="payments"/>}>
             <Route path="/payments" element={<PaymentsPage/>}/>
           </Route>

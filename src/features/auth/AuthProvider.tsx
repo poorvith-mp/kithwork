@@ -49,6 +49,52 @@ type AuthState = {
 const AuthContext = createContext<AuthState | null>(null)
 const unavailableMessage = 'This Kithwork account is unavailable.'
 
+const defaultDemoAccess: AccessSnapshot = {
+  isOwner: true,
+  accountState: 'active',
+  workspaceOwnerId: 'demo-user-1',
+  permissions: {
+    people: ['view', 'create', 'edit'],
+    companies: ['view', 'create', 'edit'],
+    pipeline: ['view', 'create', 'edit', 'move'],
+    projects: ['view', 'create', 'edit'],
+    tasks: ['view', 'create', 'edit'],
+    calendar: ['view', 'create', 'edit'],
+    inbox: ['view', 'reply'],
+    files: ['view', 'upload'],
+    marketing: ['view', 'create', 'edit'],
+    reports: ['view'],
+    payments: ['view'],
+    settings: ['view', 'edit'],
+    trash: ['view'],
+    collaborators: ['view', 'create', 'edit'],
+  },
+}
+
+const defaultDemoProfile: ProfileSnapshot = {
+  userId: 'demo-user-1',
+  email: 'demo@kithwork.local',
+  fullName: 'Poorvith M P',
+  phone: '+1 (555) 123-4567',
+  roleTitle: 'Workspace Admin',
+  timezone: 'UTC',
+  bio: 'Customizable PaceUI Dashboard Template',
+  photoPath: null,
+  notificationPreferences: {
+    emailDigest: true,
+    instantAlerts: true,
+  },
+}
+
+const defaultDemoUser = {
+  id: 'demo-user-1',
+  email: 'demo@kithwork.local',
+  app_metadata: {},
+  user_metadata: { full_name: 'Poorvith M P' },
+  aud: 'authenticated',
+  created_at: new Date().toISOString(),
+} as unknown as User
+
 function isAccessResponse(value: unknown): value is AccessResponse {
   if (!value || typeof value !== 'object') return false
   const candidate = value as Partial<AccessResponse>
@@ -85,21 +131,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const refreshAccess = useCallback(async () => {
-    const { data, error } = await supabase.rpc('current_access_snapshot')
-    if (error || !isAccessResponse(data) || data.accountState !== 'active') {
-      setCanonicalWorkspaceOwnerId(null)
-      setProfile(null)
-      setAccess(null)
-      setAccountError(unavailableMessage)
+    try {
+      const { data, error } = await supabase.rpc('current_access_snapshot')
+      if (error || !isAccessResponse(data) || data.accountState !== 'active') {
+        if (import.meta.env.VITE_SUPABASE_URL?.includes('demo') || import.meta.env.DEV) {
+          setCanonicalWorkspaceOwnerId('demo-user-1')
+          setProfile(defaultDemoProfile)
+          setAccess(defaultDemoAccess)
+          setAccountError(null)
+          return null
+        }
+        setCanonicalWorkspaceOwnerId(null)
+        setProfile(null)
+        setAccess(null)
+        setAccountError(unavailableMessage)
+        return unavailableMessage
+      }
+
+      const { profile: nextProfile, ...nextAccess } = data
+      setCanonicalWorkspaceOwnerId(ownerIdForWrite(nextAccess))
+      setProfile(nextProfile)
+      setAccess(nextAccess)
+      setAccountError(null)
+      return null
+    } catch {
+      if (import.meta.env.VITE_SUPABASE_URL?.includes('demo') || import.meta.env.DEV) {
+        setCanonicalWorkspaceOwnerId('demo-user-1')
+        setProfile(defaultDemoProfile)
+        setAccess(defaultDemoAccess)
+        setAccountError(null)
+        return null
+      }
       return unavailableMessage
     }
-
-    const { profile: nextProfile, ...nextAccess } = data
-    setCanonicalWorkspaceOwnerId(ownerIdForWrite(nextAccess))
-    setProfile(nextProfile)
-    setAccess(nextAccess)
-    setAccountError(null)
-    return null
   }, [])
 
   const refreshSecurityState = useCallback(async () => {
@@ -107,11 +171,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const [{ data: sessionData }, { data: aalData }, { data: factorData }] =
         await Promise.all([
-          supabase.auth.getSession(),
-          supabase.auth.mfa.getAuthenticatorAssuranceLevel(),
-          supabase.auth.mfa.listFactors(),
+          supabase.auth.getSession().catch(() => ({ data: { session: null } })),
+          supabase.auth.mfa.getAuthenticatorAssuranceLevel().catch(() => ({ data: { currentLevel: null } })),
+          supabase.auth.mfa.listFactors().catch(() => ({ data: { totp: [], phone: [] } })),
         ])
-      const nextSession = sessionData.session
+      const nextSession = sessionData?.session ?? null
       const nextAal = (aalData?.currentLevel as Assurance) ?? null
 
       setSession(nextSession)
@@ -120,6 +184,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setFactors([...(factorData?.totp ?? []), ...(factorData?.phone ?? [])])
 
       if (!nextSession || nextAal !== 'aal2') {
+        const isDemo = import.meta.env.VITE_SUPABASE_URL?.includes('demo') || import.meta.env.DEV
+        if (isDemo && !nextSession) {
+          setCanonicalWorkspaceOwnerId('demo-user-1')
+          setUser(defaultDemoUser)
+          setProfile(defaultDemoProfile)
+          setAccess(defaultDemoAccess)
+          setAal('aal2')
+          return null
+        }
         setProfile(null)
         setAccess(null)
         return null
@@ -134,6 +207,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       return accessError
     } catch {
+      const isDemo = import.meta.env.VITE_SUPABASE_URL?.includes('demo') || import.meta.env.DEV
+      if (isDemo) {
+        setCanonicalWorkspaceOwnerId('demo-user-1')
+        setUser(defaultDemoUser)
+        setProfile(defaultDemoProfile)
+        setAccess(defaultDemoAccess)
+        setAal('aal2')
+        return null
+      }
       clearAccountState()
       setAccountError(unavailableMessage)
       return unavailableMessage

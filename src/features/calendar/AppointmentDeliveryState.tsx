@@ -1,7 +1,7 @@
 import { RefreshCw } from 'lucide-react'
 
+import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Panel'
 
 type EmailJob = {
   id: string
@@ -36,13 +36,38 @@ export function AppointmentDeliveryState({
 }) {
   const confirmed = appointmentStatus === 'confirmed'
   return (
-    <div className="appointment-delivery-state">
-      <Badge tone={confirmed ? 'success' : appointmentStatus === 'cancelled' ? 'danger' : ''}>{appointmentLabel[appointmentStatus]}</Badge>
-      {emailJob ? <Badge tone={emailJob.status === 'sent' ? 'success' : emailJob.status === 'failed' ? 'danger' : 'warning'}>{emailLabel[emailJob.status]}</Badge> : <Badge>No email job</Badge>}
+    <div className="mt-2 flex flex-wrap items-center gap-2 pl-7">
+      <Badge
+        variant={
+          confirmed ? 'success' : appointmentStatus === 'cancelled' ? 'danger' : 'default'
+        }
+      >
+        {appointmentLabel[appointmentStatus]}
+      </Badge>
+      {emailJob ? (
+        <Badge
+          variant={
+            emailJob.status === 'sent'
+              ? 'success'
+              : emailJob.status === 'failed'
+                ? 'danger'
+                : 'warning'
+          }
+        >
+          {emailLabel[emailJob.status]}
+        </Badge>
+      ) : (
+        <Badge variant="outline">No email job</Badge>
+      )}
       {emailJob?.status === 'failed' ? (
-        <div className="delivery-failure">
-          <small>{emailJob.last_error ?? 'The confirmation email could not be delivered.'}</small>
-          <Button variant="secondary" onClick={() => onRetry(emailJob.id)}><RefreshCw size={14}/>Retry email</Button>
+        <div className="mt-2 flex w-full items-center justify-between gap-3 rounded-lg border border-[#ffd5d0] bg-danger-soft p-2.5">
+          <small className="text-xs text-danger">
+            {emailJob.last_error ?? 'The confirmation email could not be delivered.'}
+          </small>
+          <Button variant="secondary" size="sm" onClick={() => onRetry(emailJob.id)}>
+            <RefreshCw size={13} />
+            <span>Retry email</span>
+          </Button>
         </div>
       ) : null}
     </div>
