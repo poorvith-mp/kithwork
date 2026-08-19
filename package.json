@@ -6,12 +6,12 @@
   "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prvthmpcypher/kithwork.git"
+    "url": "git+https://github.com/poorvith-mp/kithwork.git"
   },
   "bugs": {
-    "url": "https://github.com/prvthmpcypher/kithwork/issues"
+    "url": "https://github.com/poorvith-mp/kithwork/issues"
   },
-  "homepage": "https://github.com/prvthmpcypher/kithwork#readme",
+  "homepage": "https://github.com/poorvith-mp/kithwork#readme",
   "type": "module",
   "scripts": {
     "dev": "vite",

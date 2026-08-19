@@ -30,7 +30,7 @@ describe('unconfigured Kithwork showcase', () => {
     expect(screen.getAllByRole('link')).toHaveLength(1)
     expect(setupLink).toHaveAttribute(
       'href',
-      'https://github.com/prvthmpcypher/kithwork/blob/main/docs/SETUP.md',
+      'https://github.com/poorvith-mp/kithwork/blob/main/docs/SETUP.md',
     )
   })
 })

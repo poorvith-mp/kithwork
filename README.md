@@ -2,7 +2,7 @@
 
 Kithwork is an open-source workspace for relationships, projects, and follow-through. I built it for the work that falls between a contacts list and a heavy business suite: people, opportunities, delivery, tasks, conversations, and the next action that shouldn't get lost.
 
-[Frontend preview](https://crm-one-ebon-60.vercel.app/) · [Setup guide](docs/SETUP.md) · [Source](https://github.com/prvthmpcypher/kithwork) · [Licence](LICENSE)
+[Frontend preview](https://crm-one-ebon-60.vercel.app/) · [Setup guide](docs/SETUP.md) · [Source](https://github.com/poorvith-mp/kithwork) · [Licence](LICENSE)
 
 The public preview is deliberately read-only. Its companies, people, projects, and tasks are fictional frontend data. There is no hosted Kithwork database, account, or service behind it.
 
@@ -52,4 +52,4 @@ Set the optional `VITE_SOURCE_REPOSITORY_URL` variable in a modified deployment 
 
 ## Author
 
-I'm Poorvith M P. You can find me on [GitHub](https://github.com/prvthmpcypher), [LinkedIn](https://linkedin.com/in/poorvithmp), and [X](https://x.com/poorvith_mp).
+I'm Poorvith M P. You can find me on [GitHub](https://github.com/poorvith-mp), [LinkedIn](https://linkedin.com/in/poorvithmp), and [X](https://x.com/poorvith_mp).

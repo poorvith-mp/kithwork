@@ -1,4 +1,4 @@
-const defaultSourceRepositoryUrl = 'https://github.com/prvthmpcypher/kithwork'
+const defaultSourceRepositoryUrl = 'https://github.com/poorvith-mp/kithwork'
 
 export function resolveSourceRepositoryUrl(value: string | undefined) {
   return value?.trim() || defaultSourceRepositoryUrl

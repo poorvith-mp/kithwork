@@ -3,7 +3,7 @@ import { ArrowUpRight, BriefcaseBusiness, CheckCircle2, UsersRound } from 'lucid
 import { Badge } from '@/components/ui/Badge'
 import { showcaseData } from './showcaseData'
 
-const setupGuide = 'https://github.com/prvthmpcypher/kithwork/blob/main/docs/SETUP.md'
+const setupGuide = 'https://github.com/poorvith-mp/kithwork/blob/main/docs/SETUP.md'
 
 export function UnconfiguredShowcase() {
   return (

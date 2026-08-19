@@ -14,7 +14,7 @@ describe('AuthLayout product identity', () => {
     expect(screen.getByText('Kithwork')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'View Kithwork source' })).toHaveAttribute(
       'href',
-      'https://github.com/prvthmpcypher/kithwork',
+      'https://github.com/poorvith-mp/kithwork',
     )
   })
 })

@@ -12,7 +12,7 @@ By default, Kithwork runs out-of-the-box with pre-populated, interactive demo da
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/prvthmpcypher/kithwork.git
+git clone https://github.com/poorvith-mp/kithwork.git
 cd kithwork
 
 # 2. Install dependencies
