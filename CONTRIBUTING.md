@@ -21,7 +21,7 @@ npm run build
 
 Create a branch in your fork. The upstream Kithwork repository keeps `main` as its only long-lived branch.
 
-For the complete Supabase and Vercel path, follow [docs/SETUP.md](docs/SETUP.md). Use projects and credentials that you own.
+For the complete Supabase and Cloudflare path, follow [docs/SETUP.md](docs/SETUP.md). Use projects and credentials that you own.
 
 ## Keep the change focused
 

@@ -2,7 +2,7 @@
 
 Kithwork is an open-source workspace for relationships, projects, and follow-through. I built it for the work that falls between a contacts list and a heavy business suite: people, opportunities, delivery, tasks, conversations, and the next action that shouldn't get lost.
 
-[Frontend preview](https://crm-one-ebon-60.vercel.app/) · [Setup guide](docs/SETUP.md) · [Source](https://github.com/poorvith-mp/kithwork) · [Licence](LICENSE)
+[Frontend preview](https://kithwork.poorvith007.workers.dev/) · [Setup guide](docs/SETUP.md) · [Source](https://github.com/poorvith-mp/kithwork) · [Licence](LICENSE)
 
 The public preview is deliberately read-only. Its companies, people, projects, and tasks are fictional frontend data. There is no hosted Kithwork database, account, or service behind it.
 
@@ -15,17 +15,17 @@ The public preview is deliberately read-only. Its companies, people, projects, a
 - Optional outbound email and campaigns through the operator's own Resend account.
 - Supabase Row Level Security on the application tables, with AAL2 checks around protected access.
 
-Payments are not implemented. Public website intake, inbound email webhooks, and website deployment controls are not bundled. The default Vercel cron runs once per day so it works on Hobby; Pro operators can change it to a shorter supported interval.
+Payments are not implemented. Public website intake, inbound email webhooks, and website deployment controls are not bundled. The default Cloudflare Worker cron runs once per day; operators can change the trigger in `wrangler.jsonc`.
 
-Without the three required `VITE_` variables, Kithwork shows the same read-only preview as the public deployment and never creates a Supabase client. Add your own Supabase and Vercel configuration to load the complete authenticated application.
+Without the three required `VITE_` variables, Kithwork shows the same read-only preview as the public deployment and never creates a Supabase client. Add your own Supabase and Cloudflare configuration to load the complete authenticated application.
 
 ## Your infrastructure, not mine
 
-Each Kithwork installation uses its own Supabase and Vercel projects. No default value connects to my database, users, email account, or deployment.
+Each Kithwork installation uses its own Supabase project and Cloudflare Worker. No default value connects to my database, users, email account, or deployment.
 
 One deployment represents one workspace. The first Auth user becomes its owner. Later users must be invited by that owner and receive explicit permissions. If you need separate customers or organisations, deploy separate projects or extend the tenancy model before using it in production.
 
-Start with the [complete setup guide](docs/SETUP.md). It covers the database migrations, Auth settings, MFA, Edge Functions, environment variables, Vercel deployment, optional Resend setup, and the checks to run before storing real data.
+Start with the [complete setup guide](docs/SETUP.md). It covers the database migrations, Auth settings, MFA, Edge Functions, environment variables, Cloudflare deployment, optional Resend setup, and the checks to run before storing real data.
 
 ## Local application checks
 

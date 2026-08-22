@@ -19,7 +19,8 @@
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && npx wrangler deploy"
   },
   "engines": {
     "node": ">=22"
@@ -27,7 +28,6 @@
   "dependencies": {
     "@supabase/supabase-js": "2.112.2",
     "@tailwindcss/vite": "^4.3.3",
-    "@vercel/analytics": "2.0.1",
     "clsx": "2.1.1",
     "date-fns": "4.4.0",
     "lucide-react": "1.30.0",

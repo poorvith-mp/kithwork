@@ -11,7 +11,7 @@ export async function handleProcessJobs(
   fetcher: typeof fetch = fetch,
 ) {
   const startedAt = Date.now()
-  const requestId = request.headers.get('x-vercel-id')
+  const requestId = request.headers.get('cf-ray')
   const log = (level: 'info' | 'error', message: string, status: number) => {
     const entry = JSON.stringify({
       level,
@@ -63,8 +63,4 @@ export async function handleProcessJobs(
     log('error', 'upstream_unavailable', 502)
     return Response.json({ ok: false }, { status: 502 })
   }
-}
-
-export function GET(request: Request) {
-  return handleProcessJobs(request, process.env)
 }

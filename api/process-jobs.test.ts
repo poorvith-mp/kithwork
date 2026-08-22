@@ -13,7 +13,7 @@ async function loadModule() {
   return import(/* @vite-ignore */ modulePath).catch(() => null) as Promise<ProcessJobsModule | null>
 }
 
-describe('process-jobs Vercel function', () => {
+describe('process-jobs Cloudflare Worker route', () => {
   it('stays idle on the public frontend preview when no backend is configured', async () => {
     const module = await loadModule()
     expect(module).not.toBeNull()
@@ -30,7 +30,7 @@ describe('process-jobs Vercel function', () => {
     expect(fetcher).not.toHaveBeenCalled()
   })
 
-  it('rejects requests without Vercel cron authentication', async () => {
+  it('rejects requests without cron authentication', async () => {
     const module = await loadModule()
     expect(module).not.toBeNull()
     if (!module) return

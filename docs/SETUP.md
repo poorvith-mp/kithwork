@@ -2,7 +2,7 @@
 
 Kithwork is a modern, modular, and customizable dashboard workspace template built with **React 19**, **Vite**, **Tailwind CSS v4**, and **PaceUI** design aesthetics.
 
-It is designed to be used both as an **instant, zero-config frontend template** and as a **full-stack operational workspace** backed by Supabase and Vercel.
+It is designed to be used both as an **instant, zero-config frontend template** and as a **full-stack operational workspace** backed by Supabase and Cloudflare Workers.
 
 ---
 
